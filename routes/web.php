@@ -44,5 +44,5 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-Route::patch('cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
+Route::patch('cart/update/{product}', [CartController::class, 'update'])->name('cart.update.product');
 Route::patch('cart/update', [CartController::class, 'update'])->name('cart.update');

@@ -35,10 +35,6 @@ class UserController extends Controller
         User::find($id)->delete(); // 刪除用戶
         return response()->json(['message' => 'User deleted']);
     }
-    public function index()
-    {
-        return dd(User::all()); // 調試用
-    }
 } {
     //
 }

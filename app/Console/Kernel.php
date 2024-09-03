@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Console\Commands\SyncProductsFromCloud;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,8 +14,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // 在這裡註冊自定義命令，例如：
-        // \App\Console\Commands\SyncUsersFromCloud::class,
+        // 在這裡註冊自定義命令
+        \App\Console\Commands\SyncUsersFromCloud::class,
+        \App\Console\Commands\SyncProductsFromCloud::class,
     ];
 
     /**
@@ -27,6 +29,7 @@ class Kernel extends ConsoleKernel
     {
         // 設置調度任務，例如每小時執行一次同步任務
         $schedule->command('app:sync-users-from-cloud')->hourly();
+        $schedule->command('app:sync-products-from-cloud')->hourly();
     }
 
     /**
@@ -36,8 +39,10 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
+        // 自動加載位於 app/Console/Commands 目錄下的命令
         $this->load(__DIR__ . '/Commands');
 
+        // 加載 routes/console.php 文件中的命令
         require base_path('routes/console.php');
     }
 }

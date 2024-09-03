@@ -40,4 +40,8 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', '產品創建成功');
     }
+    public function getProducts()
+    {
+        return Product::all(); // 获取所有产品并返回 JSON 响应
+    }
 }

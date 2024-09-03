@@ -72,7 +72,6 @@
                     <div class="social-login mt-3">
                         <div class="d-flex justify-content-center">
                             <a href="{{ url('auth/google') }}" class="btn btn-danger me-2">Login with Google</a>
-                            <a href="{{ url('auth/facebook') }}" class="btn btn-primary">Login with Facebook</a>
                         </div>
                     </div>
                     <!-- End of Social Login Buttons -->

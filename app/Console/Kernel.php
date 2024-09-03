@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // 設置調度任務，例如每小時執行一次同步任務
-        // $schedule->command('sync:users')->hourly();
+        $schedule->command('app:sync-users-from-cloud')->hourly();
     }
 
     /**

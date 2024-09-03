@@ -52,15 +52,24 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                <!-- 如果用戶是 admin，顯示創建產品的選項 -->
+                                @if (auth()->user() && auth()->user()->isAdmin())
+                                <a class="dropdown-item" href="{{ route('products.create') }}">
+                                    {{ __('Create Product') }}
+                                </a>
+                                @endif
+
+                                <!-- 登出選項 -->
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
+                                <!-- 登出表單 -->
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
                             </div>
+
                         </li>
                         @endguest
                     </ul>

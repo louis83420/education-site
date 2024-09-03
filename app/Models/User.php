@@ -21,6 +21,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role', // 確保數據庫中有這個字段
+        'provider_id',
+        'avatar',
     ];
 
     /**

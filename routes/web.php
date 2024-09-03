@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,3 +47,10 @@ Route::get('/products/create', [ProductController::class, 'create'])->name('prod
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 Route::patch('cart/update/{product}', [CartController::class, 'update'])->name('cart.update.product');
 Route::patch('cart/update', [CartController::class, 'update'])->name('cart.update');
+
+
+Route::get('auth/google', [LoginController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
+Route::get('auth/facebook', [LoginController::class, 'redirectToFacebook'])->name('auth.facebook');
+Route::get('auth/facebook/callback', [LoginController::class, 'handleFacebookCallback']);

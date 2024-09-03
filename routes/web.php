@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
-
+use Laravel\Socialite\Facades\Socialite;
 
 
 /*
@@ -54,3 +54,6 @@ Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallbac
 
 Route::get('auth/facebook', [LoginController::class, 'redirectToFacebook'])->name('auth.facebook');
 Route::get('auth/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
+Route::get('/test-socialite', function () {
+    dd(Socialite::driver('google'));
+});

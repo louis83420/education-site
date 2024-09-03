@@ -43,7 +43,7 @@ class LoginController extends Controller
      */
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->user();
+        $user = Socialite::driver('google')->stateless()->user();
 
         // 逻辑：查找用户、创建用户或登录用户
         // 比如：使用 email 查找用户

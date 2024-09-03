@@ -6,3 +6,66 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+// 自定义样式
+body {
+    background-color: #f0e6d6; // 背景颜色
+    color: #333; // 文字颜色
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 3em;
+    color: #2c3e50; // 标题颜色
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-secondary {
+    background-color: #495057;
+    border-color: #495057;
+}
+
+.content {
+    background-color: rgba(255, 255, 255, 0.9); // 背景颜色，带有透明度
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 20px auto; // 使内容居中
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); // 添加阴影
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2c3e50;
+    /* 设置文本颜色 */
+    text-transform: uppercase;
+    /* 将文本转换为大写 */
+    letter-spacing: 1px;
+    /* 增加字母间距 */
+}
+
+.navbar-brand:hover {
+    color: #17a2b8;
+    /* 鼠标悬停时的颜色 */
+    text-decoration: none;
+    /* 移除下划线 */
+}

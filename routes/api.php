@@ -10,7 +10,7 @@ Route::post('/users', [UserController::class, 'store']); // 新增用戶
 Route::put('/users/{id}', [UserController::class, 'update']); // 更新用戶
 Route::delete('/users/{id}', [UserController::class, 'destroy']); // 刪除用戶
 Route::get('/new-users', [UserController::class, 'getNewUsers']); // 連接新用戶至地端資料庫
-Route::get('/products', [ProductController::class, 'index']); // 查詢所有商品
+Route::get('/products', [ProductController::class, 'getProducts']); // 查詢所有商品
 
 Route::get('/test-api', function () {
     return 'API route is working';

@@ -42,6 +42,6 @@ class ProductController extends Controller
     }
     public function getProducts()
     {
-        return Product::all(); // 获取所有产品并返回 JSON 响应
+        return response()->json(Product::all());
     }
 }

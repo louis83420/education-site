@@ -21,7 +21,13 @@ class UserController extends Controller
     {
         return User::create($request->all()); // 新增用戶
     }
+    public function getNewUsers(Request $request)
+    {
+        // 返回最近一天內新增的使用者
+        $users = User::where('created_at', '>=', now()->subDay())->get();
 
+        return response()->json($users);
+    }
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);

@@ -25,7 +25,7 @@ class UserController extends Controller
     public function getNewUsers(Request $request)
     {
         // 返回最近一天內新增的使用者
-        $users = User::where('created_at', '>=', now()->subDay())->get();
+        $users = User::where('created_at', '>=', now()->subDay())->get(['id', 'name', 'email', 'password', 'created_at', 'updated_at', 'role']);
 
         return response()->json($users);
     }

@@ -21,6 +21,7 @@ class UserController extends Controller
     {
         return User::create($request->all()); // 新增用戶
     }
+
     public function getNewUsers(Request $request)
     {
         // 返回最近一天內新增的使用者
@@ -28,6 +29,7 @@ class UserController extends Controller
 
         return response()->json($users);
     }
+
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -41,6 +43,4 @@ class UserController extends Controller
         User::find($id)->delete(); // 刪除用戶
         return response()->json(['message' => 'User deleted']);
     }
-} {
-    //
 }

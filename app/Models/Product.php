@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+
+    // 允許批量賦值的字段
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'stock',
+        'image',
+    ];
 }

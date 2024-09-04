@@ -57,6 +57,9 @@
                                 <a class="dropdown-item" href="{{ route('products.create') }}">
                                     {{ __('Create Product') }}
                                 </a>
+                                <a class="dropdown-item" href="{{ route('products.index') }}">
+                                    {{ __('Edit Products') }}
+                                </a>
                                 @endif
 
                                 <!-- 登出選項 -->

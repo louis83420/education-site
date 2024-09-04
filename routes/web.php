@@ -57,3 +57,6 @@ Route::get('auth/facebook/callback', [LoginController::class, 'handleFacebookCal
 Route::get('/test-socialite', function () {
     dd(Socialite::driver('google'));
 });
+// 產品編輯和更新路由
+Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');

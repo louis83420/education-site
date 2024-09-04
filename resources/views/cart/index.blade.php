@@ -38,10 +38,27 @@
         @csrf
         <button type="submit" class="btn btn-warning">清空購物車</button>
     </form>
+    <form action="{{ route('cart.checkout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-success mt-3">結帳</button>
+    </form>
+
     @else
     <p>您的購物車是空的。</p>
     @endif
     <a href="{{ route('products.index') }}" class="btn btn-primary mt-3">返回商品列表</a>
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -59,9 +76,12 @@
                     quantity: quantity
                 },
                 success: function(response) {
-                    // 更新小计和总金额
+                    // 更新小計和總金額
                     $('[data-id="' + id + '"]').closest('tr').find('.item-total').text('$' + response.itemTotal);
                     $('#totalAmount').text(response.totalAmount);
+                },
+                error: function(xhr) {
+                    alert('更新數量失敗，請重試。');
                 }
             });
         });

@@ -48,7 +48,7 @@ Route::post('/products', [ProductController::class, 'store'])->name('products.st
 Route::patch('cart/update/{product}', [CartController::class, 'update'])->name('cart.update.product');
 Route::patch('cart/update', [CartController::class, 'update'])->name('cart.update');
 
-
+// 外部API登入方式
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
 
@@ -60,3 +60,5 @@ Route::get('/test-socialite', function () {
 // 產品編輯和更新路由
 Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
+// 產品結帳
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');

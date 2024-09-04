@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -35,6 +36,7 @@ class CartController extends Controller
         } else {
             // 否則，將商品添加到購物車
             $cart[$product->id] = [
+                'id' => $product->id,  // 添加商品 ID
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => 1
@@ -102,5 +104,44 @@ class CartController extends Controller
 
         // 重定向到購物車頁面
         return redirect()->route('cart.index');
+    }
+    public function checkout(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $cart = session()->get('cart', []);
+
+            foreach ($cart as $item) {
+                if (!isset($item['id'])) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', '購物車數據錯誤');
+                }
+
+                $product = Product::find($item['id']);
+
+                if (!$product) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', '找不到商品');
+                }
+
+                if ($product->stock < $item['quantity']) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', '庫存不足');
+                }
+
+                $product->stock -= $item['quantity'];
+                $product->save();
+            }
+
+            DB::commit();
+            session()->forget('cart');
+
+            return redirect()->route('cart.index')->with('success', '結帳成功');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('結帳失敗: ' . $e->getMessage());
+            return redirect()->back()->with('error', '結帳失敗，請稍後再試');
+        }
     }
 }

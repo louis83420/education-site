@@ -16,7 +16,7 @@
 
                     {{ __('You are logged in!') }}
 
-                    <!-- 添加返回商品列表按钮 -->
+                    <!-- 添加返回列表按鈕 -->
                     <div class="mt-4">
                         <a href="{{ route('products.index') }}" class="btn btn-primary">返回商品列表</a>
                     </div>

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-use Socialite; // 导入 Socialite
+use Socialite; // 導入 Socialite
 
 class LoginController extends Controller
 {
@@ -47,26 +47,26 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('google')->stateless()->user();
 
-        // 逻辑：查找用户、创建用户或登录用户
+        // 邏輯：查找用户、創建用户或登入用户
         // 比如：使用 email 查找用户
         $existingUser = User::where('email', $user->email)->first();
 
         if ($existingUser) {
             auth()->login($existingUser);
         } else {
-            // 如果用户不存在，创建一个新用户
+            // 如果用户不存在，創建一个新用户
             $newUser = User::create([
                 'name' => $user->name,
                 'email' => $user->email,
-                'google_id' => $user->id, // 假设你在 users 表中添加了 google_id 字段
-                // 可以为用户设置一个随机密码，或者不设置密码
+                'google_id' => $user->id, // 假設你在 users 表中添加了 google_id 字段
+                // 可以為用户設置一个隨機密碼，或者不設置密碼
                 'password' => bcrypt('random_password'),
             ]);
 
             auth()->login($newUser);
         }
 
-        return redirect()->intended('/home'); // 登录后重定向到你想要的页面
+        return redirect()->intended('/home'); // 登入後重定向到你想要的頁面
     }
 
     /**
@@ -88,24 +88,24 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('facebook')->user();
 
-        // 逻辑：查找用户、创建用户或登录用户
+        // 邏輯：查找用户、創建用户或登录用户
         $existingUser = User::where('email', $user->email)->first();
 
         if ($existingUser) {
             auth()->login($existingUser);
         } else {
-            // 如果用户不存在，创建一个新用户
+            // 如果用户不存在，創建一个新用户
             $newUser = User::create([
                 'name' => $user->name,
                 'email' => $user->email,
-                'facebook_id' => $user->id, // 假设你在 users 表中添加了 facebook_id 字段
-                // 可以为用户设置一个随机密码，或者不设置密码
+                'facebook_id' => $user->id, // 假設你在 users 表中添加了 facebook_id 字段
+                // 可以為用户設置一个隨機密码，或者不設置密碼
                 'password' => bcrypt('random_password'),
             ]);
 
             auth()->login($newUser);
         }
 
-        return redirect()->intended('/home'); // 登录后重定向到你想要的页面
+        return redirect()->intended('/home'); // 登入後重定向到你想要的頁面
     }
 }

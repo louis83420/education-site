@@ -107,11 +107,19 @@ class CartController extends Controller
     }
     public function checkout(Request $request)
     {
+        // 檢查用戶是否登入
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', '請先登入後再進行結帳');
+        }
+
+        $user = auth()->user();
         DB::beginTransaction();
 
         try {
             $cart = session()->get('cart', []);
+            $totalAmount = 0;
 
+            // 計算購物車中的商品總金額
             foreach ($cart as $item) {
                 if (!isset($item['id'])) {
                     DB::rollBack();
@@ -119,7 +127,6 @@ class CartController extends Controller
                 }
 
                 $product = Product::find($item['id']);
-
                 if (!$product) {
                     DB::rollBack();
                     return redirect()->back()->with('error', '找不到商品');
@@ -130,14 +137,33 @@ class CartController extends Controller
                     return redirect()->back()->with('error', '庫存不足');
                 }
 
+                // 累加商品的總價格
+                $totalAmount += $product->price * $item['quantity'];
+            }
+
+            // 檢查用戶點數是否足夠
+            if ($user->points < $totalAmount) {
+                DB::rollBack();
+                return redirect()->back()->with('error', '點數不足，無法結帳');
+            }
+
+            // 扣除商品庫存並扣除用戶點數
+            foreach ($cart as $item) {
+                $product = Product::find($item['id']);
                 $product->stock -= $item['quantity'];
                 $product->save();
             }
 
+            // 扣除用戶的點數
+            $user->points -= $totalAmount;
+            $user->save();
+
             DB::commit();
+
+            // 清空購物車
             session()->forget('cart');
 
-            return redirect()->route('cart.index')->with('success', '結帳成功');
+            return redirect()->route('cart.index')->with('success', '結帳成功，點數已扣除');
         } catch (\Exception $e) {
             DB::rollBack();
             \Log::error('結帳失敗: ' . $e->getMessage());

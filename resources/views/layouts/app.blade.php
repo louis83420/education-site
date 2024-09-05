@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
 </head>
 
 <body>
@@ -79,6 +80,13 @@
                 </div>
             </div>
         </nav>
+
+        <!-- 彈出錯誤訊息的區塊 -->
+        @if(session('error'))
+        <script>
+            alert("{{ session('error') }}");
+        </script>
+        @endif
 
         <main class="py-4">
             @yield('content')

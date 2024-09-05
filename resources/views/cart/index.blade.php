@@ -15,7 +15,12 @@
             </tr>
         </thead>
         <tbody>
+            @php $hasStockIssue = false; @endphp
             @foreach(Session::get('cart') as $id => $item)
+            @php
+            $product = \App\Models\Product::find($id); // 查找每個商品
+            $stockMessage = ''; // 庫存狀態信息
+            @endphp
             <tr>
                 <td>{{ $item['name'] }}</td>
                 <td>${{ $item['price'] }}</td>
@@ -30,29 +35,48 @@
                     </form>
                 </td>
             </tr>
-            @endforeach
+            @if($product && $product->stock < $item['quantity'])
+                @php
+                $hasStockIssue=true;
+                $stockMessage='庫存不足' ;
+                @endphp
+                <tr>
+                <td colspan="5">
+                    <div class="alert alert-warning">
+                        {{ $product->name }}: 庫存不足，僅剩 {{ $product->stock }} 件
+                    </div>
+                </td>
+                </tr>
+                @endif
+                @endforeach
         </tbody>
     </table>
     <p><strong>總金額: $<span id="totalAmount">{{ $totalAmount }}</span></strong></p>
+
     <form action="{{ route('cart.clear') }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-warning">清空購物車</button>
     </form>
+
+    <!-- 如果有庫存不足，結帳按鈕將被禁用 -->
     <form action="{{ route('cart.checkout') }}" method="POST">
         @csrf
-        <button type="submit" class="btn btn-success mt-3">結帳</button>
+        <button type="submit" class="btn btn-success mt-3" @if($hasStockIssue) disabled @endif>結帳</button>
     </form>
 
     @else
     <p>您的購物車是空的。</p>
     @endif
     <a href="{{ route('products.index') }}" class="btn btn-primary mt-3">返回商品列表</a>
+
+    <!-- 成功信息 -->
     @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
     @endif
 
+    <!-- 錯誤信息 -->
     @if(session('error'))
     <div class="alert alert-danger">
         {{ session('error') }}

@@ -15,10 +15,17 @@
                     <p class="card-text">{{ $product->description }}</p>
                     <p class="card-text">${{ $product->price }}</p>
 
-                    <!-- 購物車按鈕 -->
+                    <!-- 顯示庫存狀態 -->
+                    @if ($product->stock > 0)
+                    <p class="card-text">庫存: {{ $product->stock }} 件</p>
+                    @else
+                    <p class="card-text text-danger">補貨中</p>
+                    @endif
+
+                    <!-- 購物車按鈕，如果庫存為 0 則禁用按鈕 -->
                     <form action="{{ route('cart.add', $product) }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-primary">添加到購物車</button>
+                        <button type="submit" class="btn btn-primary" {{ $product->stock == 0 ? 'disabled' : '' }}>添加到購物車</button>
                     </form>
 
                     <!-- 如果是 admin 用戶，顯示編輯和刪除按鈕 -->

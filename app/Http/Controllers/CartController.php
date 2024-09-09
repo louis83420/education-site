@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use App\Models\Order;
+use App\Models\OrderItem;
+
+
 
 class CartController extends Controller
 {
@@ -147,11 +151,27 @@ class CartController extends Controller
                 return redirect()->back()->with('error', '點數不足，無法結帳');
             }
 
-            // 扣除商品庫存並扣除用戶點數
+            // 創建訂單
+            $order = Order::create([
+                'user_id' => $user->id,
+                'total_amount' => $totalAmount,
+                'status' => 'completed',
+            ]);
+
+            // 扣除商品庫存並扣除用戶點數，並記錄訂單項目
             foreach ($cart as $item) {
                 $product = Product::find($item['id']);
                 $product->stock -= $item['quantity'];
                 $product->save();
+
+                // 創建訂單項目，包含商品名稱快照
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $product->id,
+                    'quantity' => $item['quantity'],
+                    'price' => $product->price,
+                    'product_name' => $product->name, // 這裡添加商品名稱
+                ]);
             }
 
             // 扣除用戶的點數

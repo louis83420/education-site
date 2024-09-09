@@ -69,3 +69,29 @@ h1 {
     text-decoration: none;
     /* 移除下划线 */
 }
+
+.table th,
+.table td {
+    text-align: center;
+    /* 將內容居中對齊 */
+    vertical-align: middle;
+    /* 垂直居中 */
+}
+
+.table {
+    width: 100%;
+    /* 設置表格寬度為100% */
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.table th {
+    font-weight: bold;
+    background-color: #f8f9fa;
+    /* 表頭背景顏色 */
+    padding: 12px;
+}
+
+.table td {
+    padding: 12px;
+}

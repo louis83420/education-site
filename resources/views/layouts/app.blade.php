@@ -64,7 +64,10 @@
                                     {{ __('Edit Products') }}
                                 </a>
                                 @endif
-
+                                <!-- 我的訂單 -->
+                                <a class="dropdown-item" href="{{ route('orders.index') }}">
+                                    {{ __('My orders') }}
+                                </a>
                                 <!-- 登出選項 -->
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

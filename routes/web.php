@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\OrderController;
 
 
 /*
@@ -62,3 +63,5 @@ Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name(
 Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
 // 產品結帳
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+// 產品訂單
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');

@@ -65,3 +65,4 @@ Route::put('products/{product}', [ProductController::class, 'update'])->name('pr
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 // 產品訂單
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');

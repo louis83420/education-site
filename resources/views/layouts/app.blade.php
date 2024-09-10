@@ -3,7 +3,9 @@
 
 <head>
     @include('layouts.meta')
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Joy 自學中心') }}</title>
+    <link rel="icon" href="{{ asset('J.ico') }}" type="image/x-icon">
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">

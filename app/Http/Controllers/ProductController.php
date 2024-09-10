@@ -130,4 +130,9 @@ class ProductController extends Controller
         // 重定向回商品列表頁面並顯示成功訊息
         return redirect()->route('products.index')->with('success', '商品刪除成功');
     }
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('products.show', compact('product'));
+    }
 }

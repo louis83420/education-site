@@ -95,3 +95,21 @@ h1 {
 .table td {
     padding: 12px;
 }
+
+
+
+/* 針對 <a> 標籤移除藍色和底線 */
+a {
+    color: inherit;
+    /* 使用繼承的文字顏色 */
+    text-decoration: none;
+    /* 移除底線 */
+}
+
+/* 當鼠標懸停時仍然保持樣式 */
+a:hover {
+    color: inherit;
+    /* 保持文字顏色不變 */
+    text-decoration: none;
+    /* 保持無底線 */
+}

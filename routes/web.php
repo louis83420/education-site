@@ -7,7 +7,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\OrderController;
-
+use App\Http\Controllers\MbitController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,3 +67,17 @@ Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.c
 // 產品訂單
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+
+// mbti測試
+
+Route::get('/trymbti', [MbitController::class, 'index'])->name('mbti.index');
+Route::post('/trymbti', [MbitController::class, 'submit'])->name('mbti.submit');
+
+
+//會員資料
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+});

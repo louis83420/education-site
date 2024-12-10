@@ -66,6 +66,11 @@
                                     {{ __('Edit Products') }}
                                 </a>
                                 @endif
+                                <!-- 我的資料 -->
+                                <a class="dropdown-item" href="{{ route('profile.index') }}">
+                                    {{ __('Profile') }}
+                                </a>
+
                                 <!-- 我的訂單 -->
                                 <a class="dropdown-item" href="{{ route('orders.index') }}">
                                     {{ __('My orders') }}

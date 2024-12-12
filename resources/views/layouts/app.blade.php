@@ -39,13 +39,13 @@
                         @guest
                         @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('登入') }}</a>
                         </li>
                         @endif
 
                         @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('註冊') }}</a>
                         </li>
                         @endif
                         @else
@@ -60,24 +60,24 @@
                                 <!-- 如果用戶是 admin，顯示創建產品的選項 -->
                                 @if (auth()->user() && auth()->user()->isAdmin())
                                 <a class="dropdown-item" href="{{ route('products.create') }}">
-                                    {{ __('Create Product') }}
+                                    {{ __('新增商品') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('products.index') }}">
-                                    {{ __('Edit Products') }}
+                                    {{ __('編輯商品') }}
                                 </a>
                                 @endif
                                 <!-- 我的資料 -->
                                 <a class="dropdown-item" href="{{ route('profile.index') }}">
-                                    {{ __('Profile') }}
+                                    {{ __('個人資料') }}
                                 </a>
 
                                 <!-- 我的訂單 -->
                                 <a class="dropdown-item" href="{{ route('orders.index') }}">
-                                    {{ __('My orders') }}
+                                    {{ __('我的訂單') }}
                                 </a>
                                 <!-- 登出選項 -->
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('登出') }}
                                 </a>
 
                                 <!-- 登出表單 -->

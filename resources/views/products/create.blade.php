@@ -37,6 +37,13 @@
             <input type="file" name="image" class="form-control" accept="image/*" required>
             <!-- `accept` 屬性限制只允許上傳圖片文件 -->
         </div>
+        <div class="form-group">
+            <label for="youtube_link">課程連結 (YouTube URL)</label>
+            <input type="url" name="youtube_link" id="youtube_link" class="form-control"
+                value="{{ old('youtube_link', $product->youtube_link ?? '') }}"
+                placeholder="輸入 YouTube 課程連結">
+        </div>
+
 
         <!-- 提交按鈕 -->
         <button type="submit" class="btn btn-primary">創建產品</button>

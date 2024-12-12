@@ -38,6 +38,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'youtube_link' => 'nullable|url',
         ]);
 
         // 保存圖片並存儲其路徑
@@ -50,6 +51,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'stock' => $request->stock,
             'image' => $imagePath,
+            'youtube_link' => $request,
         ]);
 
         // 重定向到產品列表頁面並顯示成功訊息
@@ -86,6 +88,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'youtube_link' => 'nullable|url'
         ]);
 
         // 找到要更新的產品
@@ -96,6 +99,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->stock = $request->stock;
+        $product->youtube_link = $request->youtube_link;
 
         // 更新圖片如果有新圖片上傳
         if ($request->hasFile('image')) {

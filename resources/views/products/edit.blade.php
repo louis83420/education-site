@@ -37,6 +37,13 @@
             <input type="file" name="image" class="form-control" accept="image/*">
             <p>當前圖片: <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100"></p>
         </div>
+        <!-- 連結上傳字段 -->
+        <div class="form-group">
+            <label for="youtube_link">課程連結 (YouTube URL)</label>
+            <input type="url" name="youtube_link" id="youtube_link" class="form-control"
+                value="{{ old('youtube_link', $product->youtube_link ?? '') }}"
+                placeholder="輸入 YouTube 課程連結">
+        </div>
 
         <!-- 提交按鈕 -->
         <button type="submit" class="btn btn-primary">更新產品</button>
